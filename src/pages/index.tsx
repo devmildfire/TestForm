@@ -2,10 +2,35 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import getFormValues from "./getFormValues";
+import { SyntheticEvent } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const onSubmit = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
+    e.preventDefault();
+    const { isEmpty, data, formData } = getFormValues(e.currentTarget);
+
+    if (isEmpty) {
+      console.log("please provide all values");
+      return;
+    }
+
+    // do something
+    console.log(data);
+
+    // clear inputs
+    // e.currentTarget.reset();
+
+    fetch("https://httpbin.org/post", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <>
       <Head>
@@ -15,8 +40,44 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <form name="mainForm">
-          <input name="textInput"></input>
+        <form className="form" onSubmit={onSubmit}>
+          <div className="form-row">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input id="name" type="text" name="name" className="form-input" />
+          </div>
+          <div className="form-row">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              className="form-input"
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              className="form-input"
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="file" className="form-label">
+              file
+            </label>
+            <input id="file" type="file" name="file" className="form-input" />
+          </div>
+          <button type="submit" className="btn btn-block">
+            Submit
+          </button>
         </form>
       </main>
     </>
