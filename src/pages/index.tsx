@@ -23,12 +23,19 @@ export default function Home() {
     // clear inputs
     // e.currentTarget.reset();
 
-    fetch("https://httpbin.org/post", {
+    // fetch("https://httpbin.org/post", {
+    //   method: "POST",
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
+
+    fetch("http://127.0.0.1:3000/products", {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log("Done!"));
   };
 
   return (
