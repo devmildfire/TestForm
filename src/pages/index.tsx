@@ -18,7 +18,23 @@ export default function Home() {
     }
 
     // do something
-    console.log(data);
+    console.log("data from form fields ... ", data);
+
+    var addedObject: { [k: string]: any } = {};
+    addedObject.UserID = "SomeUserID";
+
+    formData.append(`addedObject[UserID]`, "SomeUserID");
+
+    // var jsonString = JSON.stringify(addedObject);
+
+    // formData.append("addedObject", jsonString);
+
+    console.log("formData ... ");
+
+    // Display the key/value pairs
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}, ${pair[1]}`);
+    }
 
     // clear inputs
     // e.currentTarget.reset();
