@@ -63,6 +63,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        <div>
+          <img
+            alt="api image"
+            src="http://localhost:3000/products/onepicture/preview_PicFinder8a75bbd9-4130-4fe1-9177-05e0c9d52fa6.png"
+          />
+        </div>
         <form className="form" onSubmit={onSubmit}>
           <div className="form-row">
             <label htmlFor="name" className="form-label">
